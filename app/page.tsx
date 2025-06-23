@@ -83,7 +83,17 @@ function Navigation() {
  */
 function HeroSection() {
   return (
-    <section id="accueil" className="pt-16 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen flex items-center relative overflow-hidden">
+    <section id="accueil" className="pt-16 min-h-screen flex items-center relative overflow-hidden">
+      {/* Image de fond */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("/hero-background.jpg")',
+          filter: 'brightness(0.3) contrast(1.1)'
+        }}
+      />
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-blue-900/70" />
       {/* Animation de découpage laser intense en arrière-plan */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Étincelles multiples et intenses */}
@@ -244,11 +254,11 @@ function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
               Expertise en{' '}
-              <span className="text-gradient">découpe laser, pliage & cintrage, soudure TIG et MIG</span>
+              <span className="text-gradient bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">découpe laser, pliage & cintrage, soudure TIG et MIG</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-200 mb-8 leading-relaxed">
               Techno Soud, votre partenaire de confiance en solutions métalliques de haute précision à Tomblaine, en Meurthe-et-Moselle. 
               Forte de plus de 20 ans d'expérience.
             </p>
