@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { 
@@ -36,6 +36,9 @@ export default function Home() {
       
       {/* Section Services */}
       <ServicesSection />
+      
+      {/* Section Galerie par Matériau */}
+      <MaterialGallerySection />
       
       {/* Section À propos */}
       <AboutSection />
@@ -81,6 +84,7 @@ function Navigation() {
           <div className="hidden md:flex items-center space-x-8">
             <a href="#accueil" className="text-gray-700 hover:text-orange-600 transition-colors">Accueil</a>
             <a href="#services" className="text-gray-700 hover:text-orange-600 transition-colors">Services</a>
+            <a href="#galerie" className="text-gray-700 hover:text-orange-600 transition-colors">Galerie</a>
             <a href="#apropos" className="text-gray-700 hover:text-orange-600 transition-colors">À propos</a>
             <a href="#contact" className="text-gray-700 hover:text-orange-600 transition-colors">Contact</a>
             <div className="flex items-center space-x-2 text-orange-600 font-semibold">
@@ -98,14 +102,14 @@ function Navigation() {
             </div>
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-orange-600 transition-colors"
+              className="text-gray-700 hover:text-orange-600 transition-colors p-2"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Menu mobile */}
+        {/*  mobile */}
         {isMenuOpen && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
@@ -127,6 +131,13 @@ function Navigation() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
+              </a>
+              <a 
+                href="#galerie" 
+                className="block text-gray-700 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Galerie
               </a>
               <a 
                 href="#apropos" 
@@ -172,7 +183,7 @@ function HeroSection() {
       />
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-blue-900/70" />
-      {/* Animation de découpage laser intense en arrière-plan */}
+      {/* Animation de soudage intense en arrière-plan */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Étincelles réduites et plus subtiles */}
         {[...Array(15)].map((_, i) => (
@@ -204,7 +215,7 @@ function HeroSection() {
           />
         ))}
         
-        {/* Arcs électriques de découpage laser plus lents */}
+        {/* Arcs électriques de soudage plus lents */}
         <motion.div
           className="absolute top-1/3 left-1/5 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-400 via-white to-transparent shadow-md shadow-cyan-400/50"
           initial={{ scaleX: 0, opacity: 0, rotateZ: 0 }}
@@ -237,7 +248,7 @@ function HeroSection() {
           }}
         />
         
-        {/* Éclairs de découpe plus doux */}
+        {/* Éclairs de soudage plus doux */}
         <motion.div
           className="absolute top-1/2 left-1/3 w-1.5 h-20 bg-gradient-to-b from-transparent via-yellow-200 via-white to-transparent shadow-lg shadow-yellow-200/50"
           initial={{ scaleY: 0, opacity: 0 }}
@@ -308,7 +319,7 @@ function HeroSection() {
           }}
         />
         
-        {/* Effet de plasma de découpe plus doux */}
+        {/* Effet de plasma de soudage plus doux */}
         <motion.div
           className="absolute top-1/2 left-1/4 w-2 h-28 bg-gradient-to-b from-white via-cyan-200 to-transparent shadow-lg shadow-cyan-200/60 blur-sm"
           initial={{ scaleY: 0, opacity: 0 }}
@@ -392,8 +403,8 @@ function ServicesSection() {
   const services = [
     {
       icon: Zap,
-      title: "Découpe laser",
-      description: "Machine découpe laser 3KW de haute précision. Capacités : Acier de 1 à 20mm, Inox de 0.2 à 12mm, Aluminium de 1 à 8mm.",
+      title: "Équipements de soudage",
+            description: "Équipements de soudage professionnels de haute précision. Capacités : Soudage TIG, MIG/MAG, à l'arc pour tous types de métaux.",
       features: ["Précision extrême", "Tous métaux", "Épaisseurs variées"]
     },
     {
@@ -467,6 +478,148 @@ function ServicesSection() {
 }
 
 /**
+ * Section galerie par type de matériau
+ */
+function MaterialGallerySection() {
+  const materials = [
+    {
+      name: "Soudure en Acier",
+      description: "Travaux de soudure sur acier pour structures industrielles, charpentes et équipements lourds.",
+      images: [
+        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
+        "/hero-background.jpg",
+        "/hero-background.jpg",
+        "/hero-background.jpg"
+      ],
+      features: ["Structures industrielles", "Charpentes métalliques", "Équipements lourds", "Réparations"]
+    },
+    {
+      name: "Soudure en Inox",
+      description: "Soudure de précision sur acier inoxydable pour l'industrie alimentaire, chimique et pharmaceutique.",
+      images: [
+        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
+        "/hero-background.jpg",
+        "/hero-background.jpg",
+        "/hero-background.jpg"
+      ],
+      features: ["Industrie alimentaire", "Secteur chimique", "Équipements médicaux", "Finitions parfaites"]
+    },
+    {
+      name: "Soudure en Aluminium",
+      description: "Soudure spécialisée sur aluminium pour l'aéronautique, l'automobile et les structures légères.",
+      images: [
+        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
+        "/hero-background.jpg",
+        "/hero-background.jpg",
+        "/hero-background.jpg"
+      ],
+      features: ["Aéronautique", "Automobile", "Structures légères", "Haute précision"]
+    }
+  ]
+
+  const [selectedMaterial, setSelectedMaterial] = useState(0)
+  const [selectedImage, setSelectedImage] = useState(0)
+
+  return (
+    <section id="galerie" className="section-padding bg-white">
+      <div className="container-max">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Nos <span className="text-gradient">Réalisations</span> par Matériau
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Découvrez nos travaux de soudure spécialisés selon le type de matériau
+          </p>
+        </motion.div>
+
+        {/* Onglets de sélection des matériaux */}
+        <div className="flex flex-wrap justify-center mb-12 gap-4">
+          {materials.map((material, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setSelectedMaterial(index)
+                setSelectedImage(0)
+              }}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                selectedMaterial === index
+                  ? 'bg-orange-600 text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {material.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Contenu du matériau sélectionné */}
+        <motion.div
+          key={selectedMaterial}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="grid lg:grid-cols-2 gap-12 items-start"
+        >
+          {/* Informations du matériau */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {materials[selectedMaterial].name}
+            </h3>
+            <p className="text-gray-600 mb-6">
+              {materials[selectedMaterial].description}
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              {materials[selectedMaterial].features.map((feature, idx) => (
+                <div key={idx} className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
+                  <span className="text-gray-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Galerie d'images */}
+          <div>
+            {/* Image principale */}
+            <div className="mb-4">
+              <img
+                src={materials[selectedMaterial].images[selectedImage]}
+                alt={`${materials[selectedMaterial].name} - Image ${selectedImage + 1}`}
+                className="w-full h-64 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+            
+            {/* Miniatures */}
+            <div className="grid grid-cols-4 gap-2">
+              {materials[selectedMaterial].images.map((image, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImage(idx)}
+                  className={`relative overflow-hidden rounded-lg ${
+                    selectedImage === idx ? 'ring-2 ring-orange-500' : ''
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`${materials[selectedMaterial].name} - Miniature ${idx + 1}`}
+                    className="w-full h-16 object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/**
  * Section à propos avec valeurs et expertise
  */
 function AboutSection() {
@@ -519,7 +672,7 @@ function AboutSection() {
               />
               <div className="p-4">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Notre Atelier</h3>
-                <p className="text-gray-600">Nos installations modernes à Matoury, équipées des dernières technologies de soudage et de découpe laser.</p>
+                <p className="text-gray-600">Nos installations modernes à Matoury, équipées des dernières technologies de soudage professionnel.</p>
               </div>
             </div>
             
@@ -528,7 +681,7 @@ function AboutSection() {
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  1 machine découpe laser 3KW
+                  Équipements de soudage TIG/MIG professionnels
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
