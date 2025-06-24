@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { 
   Flame, 
   Shield, 
@@ -61,8 +62,14 @@ function Navigation() {
       <div className="container-max">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <Flame className="h-8 w-8 text-orange-600" />
-            <span className="text-xl font-bold text-gray-900">Techno Soud</span>
+            <Image 
+              src="/logo.png" 
+              alt="Junes Soudure Logo" 
+              width={60} 
+              height={60} 
+              className="rounded-full"
+            />
+        <span className="text-xl font-bold text-gray-900">Junes Soudure</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
@@ -70,6 +77,10 @@ function Navigation() {
             <a href="#services" className="text-gray-700 hover:text-orange-600 transition-colors">Services</a>
             <a href="#apropos" className="text-gray-700 hover:text-orange-600 transition-colors">À propos</a>
             <a href="#contact" className="text-gray-700 hover:text-orange-600 transition-colors">Contact</a>
+            <div className="flex items-center space-x-2 text-orange-600 font-semibold">
+              <Phone className="h-4 w-4" />
+              <span>0694 93 49 55</span>
+            </div>
             <button className="btn-primary">Devis gratuit</button>
           </div>
         </div>
@@ -96,14 +107,14 @@ function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-blue-900/70" />
       {/* Animation de découpage laser intense en arrière-plan */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Étincelles multiples et intenses */}
-        {[...Array(35)].map((_, i) => (
+        {/* Étincelles réduites et plus subtiles */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={`spark-${i}`}
             className={`absolute rounded-full ${
-              i % 3 === 0 ? 'w-2 h-2 bg-yellow-300 shadow-lg shadow-yellow-300/50' :
-              i % 3 === 1 ? 'w-1.5 h-1.5 bg-orange-400 shadow-md shadow-orange-400/50' :
-              'w-1 h-1 bg-red-500 shadow-sm shadow-red-500/50'
+              i % 3 === 0 ? 'w-1.5 h-1.5 bg-yellow-300 shadow-md shadow-yellow-300/30' :
+              i % 3 === 1 ? 'w-1 h-1 bg-orange-400 shadow-sm shadow-orange-400/30' :
+              'w-0.5 h-0.5 bg-red-500 shadow-xs shadow-red-500/30'
             }`}
             initial={{
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
@@ -114,91 +125,91 @@ function HeroSection() {
             animate={{
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
               y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-              opacity: [0, 1, 0.8, 0],
-              scale: [0, 1.5, 1, 0]
+              opacity: [0, 0.7, 0.5, 0],
+              scale: [0, 1, 0.8, 0]
             }}
             transition={{
-              duration: 1 + Math.random() * 2,
+              duration: 3 + Math.random() * 4,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: Math.random() * 8,
               ease: "easeOut"
             }}
           />
         ))}
         
-        {/* Arcs électriques de découpage laser */}
+        {/* Arcs électriques de découpage laser plus lents */}
         <motion.div
-          className="absolute top-1/3 left-1/5 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-400 via-white to-transparent shadow-lg shadow-cyan-400/70"
+          className="absolute top-1/3 left-1/5 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-400 via-white to-transparent shadow-md shadow-cyan-400/50"
           initial={{ scaleX: 0, opacity: 0, rotateZ: 0 }}
           animate={{ 
             scaleX: [0, 1, 0.8, 0], 
-            opacity: [0, 1, 0.9, 0],
-            rotateZ: [0, 2, -1, 0]
+            opacity: [0, 0.8, 0.6, 0],
+            rotateZ: [0, 1, -0.5, 0]
           }}
           transition={{
-            duration: 1.5,
+            duration: 4,
             repeat: Infinity,
-            delay: 0.5,
+            delay: 2,
             ease: "easeInOut"
           }}
         />
         
         <motion.div
-          className="absolute top-2/3 right-1/4 w-36 h-1 bg-gradient-to-r from-transparent via-blue-300 via-white to-transparent shadow-lg shadow-blue-300/70"
+          className="absolute top-2/3 right-1/4 w-36 h-1 bg-gradient-to-r from-transparent via-blue-300 via-white to-transparent shadow-md shadow-blue-300/50"
           initial={{ scaleX: 0, opacity: 0, rotateZ: 0 }}
           animate={{ 
             scaleX: [0, 1, 0.7, 0], 
-            opacity: [0, 1, 0.8, 0],
-            rotateZ: [0, -3, 1, 0]
+            opacity: [0, 0.7, 0.5, 0],
+            rotateZ: [0, -1.5, 0.5, 0]
           }}
           transition={{
-            duration: 2,
+            duration: 5,
             repeat: Infinity,
-            delay: 1.2,
+            delay: 4,
             ease: "easeInOut"
           }}
         />
         
-        {/* Éclairs de découpe intense */}
+        {/* Éclairs de découpe plus doux */}
         <motion.div
-          className="absolute top-1/2 left-1/3 w-2 h-24 bg-gradient-to-b from-transparent via-yellow-200 via-white to-transparent shadow-2xl shadow-yellow-200/80"
+          className="absolute top-1/2 left-1/3 w-1.5 h-20 bg-gradient-to-b from-transparent via-yellow-200 via-white to-transparent shadow-lg shadow-yellow-200/50"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{ 
             scaleY: [0, 1, 0.6, 0], 
-            opacity: [0, 1, 0.7, 0]
+            opacity: [0, 0.6, 0.4, 0]
           }}
           transition={{
-            duration: 0.8,
+            duration: 3,
             repeat: Infinity,
-            delay: 2,
+            delay: 6,
             ease: "easeOut"
           }}
         />
         
-        {/* Gerbes d'étincelles concentrées */}
-        {[...Array(8)].map((_, i) => (
+        {/* Gerbes d'étincelles réduites et plus espacées */}
+        {[...Array(4)].map((_, i) => (
           <motion.div
             key={`burst-${i}`}
-            className="absolute w-16 h-16"
+            className="absolute w-12 h-12"
             style={{
-              left: `${20 + i * 10}%`,
-              top: `${30 + (i % 3) * 20}%`
+              left: `${25 + i * 15}%`,
+              top: `${35 + (i % 2) * 25}%`
             }}
           >
-            {[...Array(6)].map((_, j) => (
+            {[...Array(4)].map((_, j) => (
               <motion.div
                 key={`particle-${j}`}
-                className="absolute w-1 h-1 bg-orange-300 rounded-full shadow-sm shadow-orange-300/50"
+                className="absolute w-0.5 h-0.5 bg-orange-300 rounded-full shadow-xs shadow-orange-300/30"
                 initial={{ x: 0, y: 0, opacity: 0 }}
                 animate={{
-                  x: Math.cos((j * 60) * Math.PI / 180) * 20,
-                  y: Math.sin((j * 60) * Math.PI / 180) * 20,
-                  opacity: [0, 1, 0]
+                  x: Math.cos((j * 90) * Math.PI / 180) * 15,
+                  y: Math.sin((j * 90) * Math.PI / 180) * 15,
+                  opacity: [0, 0.7, 0]
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 4,
                   repeat: Infinity,
-                  delay: i * 0.3 + j * 0.1,
+                  delay: i * 2 + j * 0.5,
                   ease: "easeOut"
                 }}
               />
@@ -206,42 +217,42 @@ function HeroSection() {
           </motion.div>
         ))}
         
-        {/* Lueurs intenses multiples */}
+        {/* Lueurs douces et espacées */}
         <motion.div
-          className="absolute top-1/4 left-1/2 w-72 h-72 bg-orange-300 rounded-full blur-3xl"
-          initial={{ scale: 0.3, opacity: 0.1 }}
-          animate={{ scale: [0.3, 1.5, 0.8, 0.3], opacity: [0.1, 0.4, 0.2, 0.1] }}
+          className="absolute top-1/4 left-1/2 w-60 h-60 bg-orange-300 rounded-full blur-3xl"
+          initial={{ scale: 0.3, opacity: 0.05 }}
+          animate={{ scale: [0.3, 1.2, 0.7, 0.3], opacity: [0.05, 0.2, 0.1, 0.05] }}
           transition={{
-            duration: 3,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
         
         <motion.div
-          className="absolute top-3/4 right-1/3 w-48 h-48 bg-cyan-200 rounded-full blur-2xl"
-          initial={{ scale: 0.2, opacity: 0.05 }}
-          animate={{ scale: [0.2, 1.2, 0.6, 0.2], opacity: [0.05, 0.3, 0.15, 0.05] }}
+          className="absolute top-3/4 right-1/3 w-40 h-40 bg-cyan-200 rounded-full blur-2xl"
+          initial={{ scale: 0.2, opacity: 0.03 }}
+          animate={{ scale: [0.2, 1, 0.5, 0.2], opacity: [0.03, 0.15, 0.08, 0.03] }}
           transition={{
-            duration: 2.5,
+            duration: 10,
             repeat: Infinity,
-            delay: 1,
+            delay: 4,
             ease: "easeInOut"
           }}
         />
         
-        {/* Effet de plasma de découpe */}
+        {/* Effet de plasma de découpe plus doux */}
         <motion.div
-          className="absolute top-1/2 left-1/4 w-3 h-32 bg-gradient-to-b from-white via-cyan-200 to-transparent shadow-2xl shadow-cyan-200/90 blur-sm"
+          className="absolute top-1/2 left-1/4 w-2 h-28 bg-gradient-to-b from-white via-cyan-200 to-transparent shadow-lg shadow-cyan-200/60 blur-sm"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{ 
             scaleY: [0, 1, 0.8, 0], 
-            opacity: [0, 1, 0.6, 0]
+            opacity: [0, 0.7, 0.4, 0]
           }}
           transition={{
-            duration: 1.2,
+            duration: 5,
             repeat: Infinity,
-            delay: 3,
+            delay: 8,
             ease: "easeInOut"
           }}
         />
@@ -254,13 +265,14 @@ function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-              Expertise en{' '}
-              <span className="text-gradient bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">découpe laser, pliage & cintrage, soudure TIG et MIG</span>
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-4">
+              <span className="text-gradient bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">Junes Soudure</span>
             </h1>
+            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-200 mb-6">
+              20 ans d'expertise en soudure industrielle, galva, inox et aluminium
+            </h2>
             <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-              Techno Soud, votre partenaire de confiance en solutions métalliques de haute précision à Tomblaine, en Meurthe-et-Moselle. 
-              Forte de plus de 20 ans d'expérience.
+              Spécialiste en fabrication et réparation sur mesure. Notre savoir-faire couvre tous les types de soudure, pour les secteurs industriels, professionnels et particuliers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="btn-primary flex items-center justify-center">
@@ -401,12 +413,12 @@ function AboutSection() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Plus de 20 ans d'<span className="text-gradient">Excellence</span> à Tomblaine
+              Plus de 20 ans d'<span className="text-gradient">Excellence</span> à Matoury
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              Techno Soud est votre partenaire de confiance en solutions métalliques de haute précision à Tomblaine, 
-              en Meurthe-et-Moselle. Depuis notre création, nous avons évolué pour devenir un acteur incontournable 
-              dans le domaine de la transformation des métaux.
+              Junes Soudure est votre partenaire de confiance en fabrication et réparation industrielle. 
+              Depuis notre création, nous avons évolué pour devenir un acteur incontournable 
+              dans le domaine du soudage et de la réparation industrielle.
             </p>
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="text-center">
@@ -431,6 +443,21 @@ function AboutSection() {
             viewport={{ once: true }}
             className="space-y-6"
           >
+            {/* Image de l'entreprise */}
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm">
+              <Image 
+                src="/entreprise-image.jpg" 
+                alt="Extérieur de l'entreprise Junes Soudure" 
+                width={600} 
+                height={400} 
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Notre Atelier</h3>
+                <p className="text-gray-600">Nos installations modernes à Matoury, équipées des dernières technologies de soudage et de découpe laser.</p>
+              </div>
+            </div>
+            
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Nos Équipements</h3>
               <ul className="space-y-2 text-gray-600">
@@ -445,23 +472,6 @@ function AboutSection() {
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
                   1 Rouleuse (capacité : 1m50)
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Métaux Travaillés</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  Acier (1 à 20mm)
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  Inox (0.2 à 12mm)
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  Aluminium (1 à 8mm)
                 </li>
               </ul>
             </div>
@@ -480,7 +490,7 @@ function TestimonialsSection() {
     {
       name: "Jean-Claude Moreau",
       company: "Métallurgie Lorraine",
-      text: "Techno Soud a réalisé nos découpes laser avec une précision exceptionnelle. Leur machine 3KW nous a permis d'obtenir des résultats parfaits.",
+      text: "Junes Soudure a réalisé nos travaux de soudage avec une qualité exceptionnelle. Leur expertise en galva et inox nous a permis d'obtenir des résultats parfaits.",
       rating: 5
     },
     {
@@ -492,7 +502,7 @@ function TestimonialsSection() {
     {
       name: "Michel Bertrand",
       company: "Ateliers Mécaniques de l'Est",
-      text: "Soudures TIG et MIG de très haute qualité. L'équipe de Techno Soud maîtrise parfaitement son métier. Je recommande.",
+      text: "Soudures de très haute qualité sur aluminium et inox. L'équipe de Junes Soudure maîtrise parfaitement son métier. Je recommande.",
       rating: 5
     }
   ]
@@ -575,21 +585,21 @@ function ContactSection() {
                 <Phone className="h-6 w-6 text-orange-400 mr-4" />
                 <div>
                   <div className="font-semibold">Téléphone</div>
-                  <div className="text-gray-300">+33 3 83 XX XX XX</div>
+          <div className="text-gray-300">0694 93 49 55</div>
                 </div>
               </div>
               <div className="flex items-center">
                 <Mail className="h-6 w-6 text-orange-400 mr-4" />
                 <div>
                   <div className="font-semibold">Email</div>
-                  <div className="text-gray-300">contact@techno-soud.net</div>
+          <div className="text-gray-300">junes.longa@gmail.com</div>
                 </div>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-6 w-6 text-orange-400 mr-4" />
                 <div>
                   <div className="font-semibold">Adresse</div>
-                  <div className="text-gray-300">Tomblaine, Meurthe-et-Moselle (54)</div>
+                  <div className="text-gray-300">Carrefour du Larivot, 179 rue du POLYGONE, 97351 Matoury</div>
                 </div>
               </div>
             </div>
@@ -643,12 +653,19 @@ function Footer() {
       <div className="container-max">
         <div className="text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Flame className="h-6 w-6 text-orange-400" />
-            <span className="text-xl font-bold">Techno Soud</span>
+            <Image 
+              src="/logo.png" 
+              alt="Junes Soudure Logo" 
+              width={50} 
+              height={50} 
+              objectFit='cover'
+              className="rounded-full "
+            />
+      <span className="text-xl font-bold">Junes Soudure</span>
           </div>
           <p className="text-gray-400">
-            © 2024 SoudurePro. Tous droits réservés. Expert en soudure industrielle.
-          </p>
+      © 2024 Junes Soudure. Tous droits réservés. Expert en soudure industrielle.
+    </p>
         </div>
       </div>
     </footer>
