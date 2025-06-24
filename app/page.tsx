@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { 
@@ -15,7 +16,9 @@ import {
   ArrowRight,
   Wrench,
   Factory,
-  HardHat
+  HardHat,
+  Menu,
+  X
 } from 'lucide-react'
 
 /**
@@ -53,6 +56,8 @@ export default function Home() {
  * Composant de navigation avec menu responsive
  */
 function Navigation() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+
   return (
     <motion.nav 
       initial={{ y: -100 }}
@@ -69,9 +74,10 @@ function Navigation() {
               height={60} 
               className="rounded-full"
             />
-        <span className="text-xl font-bold text-gray-900">Junes Soudure</span>
+            <span className="text-xl font-bold text-gray-900">Junes Soudure</span>
           </div>
           
+          {/* Menu desktop */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#accueil" className="text-gray-700 hover:text-orange-600 transition-colors">Accueil</a>
             <a href="#services" className="text-gray-700 hover:text-orange-600 transition-colors">Services</a>
@@ -83,7 +89,68 @@ function Navigation() {
             </div>
             <button className="btn-primary">Devis gratuit</button>
           </div>
+
+          {/* Numéro de téléphone mobile */}
+          <div className="flex md:hidden items-center space-x-4">
+            <div className="flex items-center space-x-2 text-orange-600 font-semibold">
+              <Phone className="h-4 w-4" />
+              <span className="text-sm">0694 93 49 55</span>
+            </div>
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-orange-600 transition-colors"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
+
+        {/* Menu mobile */}
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-white border-t border-gray-200"
+          >
+            <div className="px-4 py-4 space-y-4">
+              <a 
+                href="#accueil" 
+                className="block text-gray-700 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Accueil
+              </a>
+              <a 
+                href="#services" 
+                className="block text-gray-700 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </a>
+              <a 
+                href="#apropos" 
+                className="block text-gray-700 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                À propos
+              </a>
+              <a 
+                href="#contact" 
+                className="block text-gray-700 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </a>
+              <button 
+                className="w-full btn-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Devis gratuit
+              </button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.nav>
   )
