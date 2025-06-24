@@ -336,7 +336,7 @@ function HeroSection() {
               <span className="text-gradient bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">Junes Soudure</span>
             </h1>
             <h2 className="text-2xl lg:text-3xl font-semibold text-gray-200 mb-6">
-              20 ans d'expertise en soudure industrielle, galva, inox et aluminium
+              Expertise en soudure industrielle, galva, inox et aluminium
             </h2>
             <p className="text-xl text-gray-200 mb-8 leading-relaxed">
               Spécialiste en fabrication et réparation sur mesure. Notre savoir-faire couvre tous les types de soudure, pour les secteurs industriels, professionnels et particuliers.
@@ -480,12 +480,10 @@ function AboutSection() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Plus de 20 ans d'<span className="text-gradient">Excellence</span> à Matoury
+              Entreprise fondée en 2021 avec l'<span className="text-gradient">Excellence</span> de MR. LONGA
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              Junes Soudure est votre partenaire de confiance en fabrication et réparation industrielle. 
-              Depuis notre création, nous avons évolué pour devenir un acteur incontournable 
-              dans le domaine du soudage et de la réparation industrielle.
+              Fondée en 2021, notre entreprise s'appuie sur plus de 20 années d'expérience dans le domaine de la soudure, acquise bien avant sa création. Nous mettons notre savoir-faire et notre rigueur au service de vos projets.
             </p>
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="text-center">
