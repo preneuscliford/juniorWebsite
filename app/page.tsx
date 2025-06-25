@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { 
@@ -478,7 +478,7 @@ function ServicesSection() {
 }
 
 /**
- * Section galerie par type de matériau
+ * Section galerie par type de matériau avec popup modal
  */
 function MaterialGallerySection() {
   const materials = [
@@ -486,10 +486,10 @@ function MaterialGallerySection() {
       name: "Soudure en Acier",
       description: "Travaux de soudure sur acier pour structures industrielles, charpentes et équipements lourds.",
       images: [
-        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
-        "/hero-background.jpg",
-        "/hero-background.jpg",
-        "/hero-background.jpg"
+        "/fabrication-de-charpente-métallique-1.jpg",
+        "/fabrication-de-charpente-métallique-2.jpg",
+        "/fabrication-de-charpente-métallique-3.jpg",
+        "/réparation-de-Godet.jpg"
       ],
       features: ["Structures industrielles", "Charpentes métalliques", "Équipements lourds", "Réparations"]
     },
@@ -497,10 +497,10 @@ function MaterialGallerySection() {
       name: "Soudure en Inox",
       description: "Soudure de précision sur acier inoxydable pour l'industrie alimentaire, chimique et pharmaceutique.",
       images: [
-        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
-        "/hero-background.jpg",
-        "/hero-background.jpg",
-        "/hero-background.jpg"
+        "/fabrication-escalier.jpg",
+        "/fabrication-portail-coulissant.jpg",
+        "/whatsapp-image-1.jpg",
+        "/whatsapp-image-2.jpg"
       ],
       features: ["Industrie alimentaire", "Secteur chimique", "Équipements médicaux", "Finitions parfaites"]
     },
@@ -508,9 +508,7 @@ function MaterialGallerySection() {
       name: "Soudure en Aluminium",
       description: "Soudure spécialisée sur aluminium pour l'aéronautique, l'automobile et les structures légères.",
       images: [
-        "/hero-background.jpg", // Placeholder - à remplacer par de vraies photos
-        "/hero-background.jpg",
-        "/hero-background.jpg",
+        "/autre.jpg",
         "/hero-background.jpg"
       ],
       features: ["Aéronautique", "Automobile", "Structures légères", "Haute précision"]
@@ -519,6 +517,65 @@ function MaterialGallerySection() {
 
   const [selectedMaterial, setSelectedMaterial] = useState(0)
   const [selectedImage, setSelectedImage] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+
+  /**
+   * Ouvre le modal avec l'image sélectionnée et définit l'index de départ
+   */
+  const openModal = (imageIndex: number) => {
+    setCurrentSlideIndex(imageIndex)
+    setIsModalOpen(true)
+  }
+
+  /**
+   * Ferme le modal
+   */
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  /**
+   * Navigation vers l'image suivante
+   */
+  const nextSlide = () => {
+    setCurrentSlideIndex((prev) => 
+      prev === materials[selectedMaterial].images.length - 1 ? 0 : prev + 1
+    )
+  }
+
+  /**
+   * Navigation vers l'image précédente
+   */
+  const prevSlide = () => {
+    setCurrentSlideIndex((prev) => 
+      prev === 0 ? materials[selectedMaterial].images.length - 1 : prev - 1
+    )
+  }
+
+  /**
+   * Gestion des touches clavier pour la navigation
+   */
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (!isModalOpen) return
+      
+      switch (e.key) {
+        case 'Escape':
+          closeModal()
+          break
+        case 'ArrowLeft':
+          prevSlide()
+          break
+        case 'ArrowRight':
+          nextSlide()
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [isModalOpen])
 
   return (
     <section id="galerie" className="section-padding bg-white">
@@ -590,7 +647,8 @@ function MaterialGallerySection() {
               <img
                 src={materials[selectedMaterial].images[selectedImage]}
                 alt={`${materials[selectedMaterial].name} - Image ${selectedImage + 1}`}
-                className="w-full h-64 object-cover rounded-lg shadow-lg"
+                className="w-full h-64 object-cover rounded-lg shadow-lg cursor-pointer hover:opacity-90 transition-opacity duration-300"
+                onClick={() => openModal(selectedImage)}
               />
             </div>
             
@@ -607,11 +665,112 @@ function MaterialGallerySection() {
                   <img
                     src={image}
                     alt={`${materials[selectedMaterial].name} - Miniature ${idx + 1}`}
-                    className="w-full h-16 object-cover hover:scale-110 transition-transform duration-300"
+                    className="w-full h-16 object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      openModal(idx)
+                    }}
                   />
                 </button>
               ))}
             </div>
+
+        {/* Modal carrousel pour affichage en grand */}
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+            onClick={closeModal}
+          >
+            <div className="relative w-full h-full flex items-center justify-center">
+              {/* Bouton fermer */}
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white hover:text-gray-300 z-20 bg-black bg-opacity-50 rounded-full p-3 transition-all duration-200 hover:bg-opacity-70"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Bouton précédent */}
+              {materials[selectedMaterial].images.length > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    prevSlide()
+                  }}
+                  className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-20 bg-black bg-opacity-50 rounded-full p-3 transition-all duration-200 hover:bg-opacity-70"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Bouton suivant */}
+              {materials[selectedMaterial].images.length > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    nextSlide()
+                  }}
+                  className="absolute right-6 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-20 bg-black bg-opacity-50 rounded-full p-3 transition-all duration-200 hover:bg-opacity-70"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Image principale avec animation */}
+              <motion.img
+                key={currentSlideIndex}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                src={materials[selectedMaterial].images[currentSlideIndex]}
+                alt={`${materials[selectedMaterial].name} - Image ${currentSlideIndex + 1}`}
+                className="max-w-[85vw] max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+
+              {/* Indicateurs de position */}
+              {materials[selectedMaterial].images.length > 1 && (
+                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                  {materials[selectedMaterial].images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setCurrentSlideIndex(idx)
+                      }}
+                      className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                        idx === currentSlideIndex
+                          ? 'bg-white scale-125'
+                          : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Compteur d'images */}
+              <div className="absolute top-6 left-6 text-white bg-black bg-opacity-50 rounded-lg px-3 py-2 text-sm font-medium z-20">
+                {currentSlideIndex + 1} / {materials[selectedMaterial].images.length}
+              </div>
+
+              {/* Titre de l'image */}
+              <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white text-center z-20">
+                <h3 className="text-lg font-semibold bg-black bg-opacity-50 rounded-lg px-4 py-2">
+                  {materials[selectedMaterial].name}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+        )}
           </div>
         </motion.div>
       </div>
