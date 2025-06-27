@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { 
@@ -397,78 +397,134 @@ function HeroSection() {
 }
 
 /**
- * Section des services de soudure avec animations
+ * Section des services de soudure avec animations modernes
  */
 function ServicesSection() {
   const services = [
     {
       icon: Zap,
       title: "Équipements de soudage",
-            description: "Équipements de soudage professionnels de haute précision. Capacités : Soudage TIG, MIG/MAG, à l'arc pour tous types de métaux.",
-      features: ["Précision extrême", "Tous métaux", "Épaisseurs variées"]
+      description: "Équipements de soudage professionnels de haute précision. Capacités : Soudage TIG, MIG/MAG, à l'arc pour tous types de métaux.",
+      features: ["Précision extrême", "Tous métaux", "Épaisseurs variées"],
+      gradient: "from-blue-500 to-cyan-500",
+      bgGradient: "from-blue-50 to-cyan-50"
     },
     {
       icon: Settings,
       title: "Pliage & Cintrage",
       description: "2 Plieuses de 160 tonnes avec tablier de 3m et 1 Rouleuse (capacité : 1m50). Solutions complètes pour la transformation des métaux.",
-      features: ["160 tonnes", "Tablier 3m", "Rouleuse 1m50"]
+      features: ["160 tonnes", "Tablier 3m", "Rouleuse 1m50"],
+      gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-50 to-pink-50"
     },
     {
       icon: Flame,
       title: "Soudure TIG (Tungsten Inert Gas)",
       description: "Nombreux postes équipés de TIG pour soudage de haute qualité. Idéal pour les finitions parfaites et les métaux nobles.",
-      features: ["Haute qualité", "Finition parfaite", "Métaux nobles"]
+      features: ["Haute qualité", "Finition parfaite", "Métaux nobles"],
+      gradient: "from-orange-500 to-red-500",
+      bgGradient: "from-orange-50 to-red-50"
     },
     {
       icon: Shield,
       title: "Soudure MIG (Metal Inert Gas)",
       description: "Postes MIG professionnels pour soudage rapide et efficace. Parfait pour la production industrielle et les gros volumes.",
-      features: ["Soudage rapide", "Production industrielle", "Gros volumes"]
+      features: ["Soudage rapide", "Production industrielle", "Gros volumes"],
+      gradient: "from-green-500 to-emerald-500",
+      bgGradient: "from-green-50 to-emerald-50"
     }
   ]
 
   return (
-    <section id="services" className="section-padding bg-white">
-      <div className="container-max">
+    <section id="services" className="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Éléments décoratifs de fond */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container-max relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Nos Services de <span className="text-gradient">Soudure</span>
+          <motion.div
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+            className="inline-block mb-4"
+          >
+            <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+              Excellence Technique
+            </span>
+          </motion.div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Nos Services de <span className="text-gradient bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Soudure</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Nous maîtrisons tous les procédés de soudage industriel pour répondre à vos besoins spécifiques
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Nous maîtrisons tous les procédés de soudage industriel avec des équipements de pointe pour répondre à vos besoins les plus exigeants
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
+              transition={{ delay: index * 0.15, type: "spring", stiffness: 100 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className={`group relative bg-gradient-to-br ${service.bgGradient} rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 border border-white/20 backdrop-blur-sm overflow-hidden`}
             >
-              <div className="flex items-center mb-4">
-                <div className="bg-orange-100 p-3 rounded-lg">
-                  <service.icon className="h-6 w-6 text-orange-600" />
+              {/* Effet de brillance au hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              
+              {/* Icône avec gradient */}
+              <div className="relative mb-6">
+                <div className={`bg-gradient-to-br ${service.gradient} p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                  <service.icon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 ml-3">{service.title}</h3>
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} p-4 rounded-xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300`}>
+                  <service.icon className="h-8 w-8 text-white" />
+                </div>
               </div>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <ul className="space-y-2">
+              
+              <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors duration-300">
+                {service.title}
+              </h3>
+              
+              <p className="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                {service.description}
+              </p>
+              
+              <div className="space-y-3">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-sm text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {feature}
-                  </li>
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + idx * 0.1 }}
+                    className="flex items-center text-sm text-gray-700 group-hover:text-gray-800 transition-colors duration-300"
+                  >
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.gradient} mr-3 group-hover:scale-110 transition-transform duration-300`}></div>
+                    <span className="font-medium">{feature}</span>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
+              
+              {/* Bouton d'action */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`mt-6 w-full bg-gradient-to-r ${service.gradient} text-white py-3 px-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0`}
+              >
+                En savoir plus
+              </motion.button>
             </motion.div>
           ))}
         </div>
@@ -486,8 +542,8 @@ function MaterialGallerySection() {
       name: "Soudure en Acier",
       description: "Travaux de soudure sur acier pour structures industrielles, charpentes et équipements lourds.",
       images: [
-        "/fabrication-de-charpente-métallique-1.jpg",
-        "/fabrication-de-charpente-métallique-2.jpg",
+        "/soudure-en-acier.jpg",
+        "/pose-tôle.jpg",
         "/fabrication-de-charpente-métallique-3.jpg",
         "/réparation-de-Godet.jpg"
       ],
@@ -538,24 +594,18 @@ function MaterialGallerySection() {
   /**
    * Navigation vers l'image suivante
    */
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => 
       prev === materials[selectedMaterial].images.length - 1 ? 0 : prev + 1
     )
-  }
+  }, [materials, selectedMaterial])
 
-  /**
-   * Navigation vers l'image précédente
-   */
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => 
       prev === 0 ? materials[selectedMaterial].images.length - 1 : prev - 1
     )
-  }
+  }, [materials, selectedMaterial])
 
-  /**
-   * Gestion des touches clavier pour la navigation
-   */
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (!isModalOpen) return
@@ -575,105 +625,233 @@ function MaterialGallerySection() {
 
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [isModalOpen])
+  }, [isModalOpen, closeModal, prevSlide, nextSlide])
 
   return (
-    <section id="galerie" className="section-padding bg-white">
-      <div className="container-max">
+    <section id="galerie" className="section-padding bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      {/* Éléments décoratifs de fond */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+      </div>
+      
+      {/* Grille de points décorative */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="grid grid-cols-12 gap-8 h-full">
+          {[...Array(144)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-1 h-1 bg-orange-400 rounded-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.5, 0] }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.1,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+      </div>
+      
+      <div className="container-max relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Nos <span className="text-gradient">Réalisations</span> par Matériau
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+            className="inline-block mb-6"
+          >
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
+              Portfolio Excellence
+            </span>
+          </motion.div>
+          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            Nos <span className="bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent">Réalisations</span> par Matériau
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez nos travaux de soudure spécialisés selon le type de matériau
+          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Découvrez nos travaux de soudure spécialisés selon le type de matériau, témoins de notre expertise et de notre savoir-faire
           </p>
         </motion.div>
 
-        {/* Onglets de sélection des matériaux */}
-        <div className="flex flex-wrap justify-center mb-12 gap-4">
+        {/* Onglets de sélection des matériaux modernisés */}
+        <div className="flex flex-wrap justify-center mb-16 gap-6">
           {materials.map((material, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => {
                 setSelectedMaterial(index)
                 setSelectedImage(0)
               }}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className={`group relative px-8 py-4 rounded-2xl font-bold transition-all duration-500 overflow-hidden ${
                 selectedMaterial === index
-                  ? 'bg-orange-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-2xl shadow-orange-500/25'
+                  : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:text-white border border-white/20 hover:bg-white/20'
               }`}
             >
-              {material.name}
-            </button>
+              {/* Effet de brillance */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              
+              <span className="relative z-10">{material.name}</span>
+              
+              {/* Indicateur actif */}
+              {selectedMaterial === index && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </motion.button>
           ))}
         </div>
 
         {/* Contenu du matériau sélectionné */}
         <motion.div
           key={selectedMaterial}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="grid lg:grid-cols-2 gap-12 items-start"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+          className="grid lg:grid-cols-2 gap-16 items-start"
         >
           {/* Informations du matériau */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
+          >
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent"
+            >
               {materials[selectedMaterial].name}
-            </h3>
-            <p className="text-gray-600 mb-6">
+            </motion.h3>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-300 mb-8 text-lg leading-relaxed"
+            >
               {materials[selectedMaterial].description}
-            </p>
-            <div className="grid grid-cols-2 gap-4">
+            </motion.p>
+            
+            <div className="grid grid-cols-1 gap-4">
               {materials[selectedMaterial].features.map((feature, idx) => (
-                <div key={idx} className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  <span className="text-gray-700">{feature}</span>
-                </div>
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + idx * 0.1 }}
+                  className="group flex items-center p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/10 border border-white/10 hover:from-orange-500/10 hover:to-red-500/10 transition-all duration-300"
+                >
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-400 mr-4 group-hover:scale-110 transition-transform duration-300"></div>
+                  <span className="text-gray-200 font-medium group-hover:text-white transition-colors duration-300">{feature}</span>
+                </motion.div>
               ))}
             </div>
-          </div>
+            
+            {/* Bouton d'action */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-8 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-6 rounded-xl font-bold shadow-lg hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300"
+            >
+              Demander un devis pour ce matériau
+            </motion.button>
+          </motion.div>
 
-          {/* Galerie d'images */}
-          <div>
-            {/* Image principale */}
-            <div className="mb-4">
-              <img
+          {/* Galerie d'images modernisée */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            {/* Image principale avec effets */}
+            <div className="relative mb-6 group">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <motion.img
+                key={selectedImage}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
                 src={materials[selectedMaterial].images[selectedImage]}
                 alt={`${materials[selectedMaterial].name} - Image ${selectedImage + 1}`}
-                className="w-full h-64 object-cover rounded-lg shadow-lg cursor-pointer hover:opacity-90 transition-opacity duration-300"
+                className="relative w-full h-80 object-cover rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition-all duration-500 border border-white/20"
                 onClick={() => openModal(selectedImage)}
               />
             </div>
             
-            {/* Miniatures */}
-            <div className="grid grid-cols-4 gap-2">
+            {/* Miniatures modernisées */}
+            <div className="grid grid-cols-4 gap-4">
               {materials[selectedMaterial].images.map((image, idx) => (
-                <button
+                <motion.div
                   key={idx}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 * idx, duration: 0.3 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative group cursor-pointer"
                   onClick={() => setSelectedImage(idx)}
-                  className={`relative overflow-hidden rounded-lg ${
-                    selectedImage === idx ? 'ring-2 ring-orange-500' : ''
-                  }`}
                 >
+                  <div className={`absolute inset-0 rounded-xl transition-all duration-300 ${
+                    selectedImage === idx
+                      ? 'bg-gradient-to-r from-orange-500/30 to-red-500/30 blur-lg scale-110'
+                      : 'bg-white/10 blur-sm group-hover:blur-md group-hover:scale-105'
+                  }`}></div>
+                  
                   <img
                     src={image}
                     alt={`${materials[selectedMaterial].name} - Miniature ${idx + 1}`}
-                    className="w-full h-16 object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                    className={`relative h-20 w-full object-cover rounded-xl transition-all duration-300 border-2 ${
+                      selectedImage === idx
+                        ? 'border-orange-400 shadow-lg shadow-orange-500/25'
+                        : 'border-white/20 group-hover:border-white/40'
+                    }`}
                     onClick={(e) => {
                       e.stopPropagation()
                       openModal(idx)
                     }}
                   />
-                </button>
+                  
+                  {/* Overlay d'activation */}
+                  {selectedImage === idx && (
+                    <motion.div
+                      layoutId="activeImage"
+                      className="absolute inset-0 border-2 border-orange-400 rounded-xl"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  
+                  {/* Icône de lecture */}
+                  <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+                    selectedImage === idx ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  }`}>
+                    <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
+          </motion.div>
 
         {/* Modal carrousel pour affichage en grand */}
         {isModalOpen && (
@@ -771,12 +949,10 @@ function MaterialGallerySection() {
             </div>
           </motion.div>
         )}
-          </div>
         </motion.div>
       </div>
     </section>
-  )
-}
+)}
 
 /**
  * Section à propos avec valeurs et expertise
