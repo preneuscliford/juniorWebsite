@@ -400,36 +400,20 @@ function HeroSection() {
  * Section des services de soudure avec animations modernes
  */
 function ServicesSection() {
-  const services = [
+  const services = [    
     {
-      icon: Zap,
-      title: "Équipements de soudage",
-      description: "Équipements de soudage professionnels de haute précision. Capacités : Soudage TIG, MIG/MAG, à l'arc pour tous types de métaux.",
-      features: ["Précision extrême", "Tous métaux", "Épaisseurs variées"],
-      gradient: "from-blue-500 to-cyan-500",
-      bgGradient: "from-blue-50 to-cyan-50"
-    },
-    {
-      icon: Settings,
-      title: "Pliage & Cintrage",
-      description: "2 Plieuses de 160 tonnes avec tablier de 3m et 1 Rouleuse (capacité : 1m50). Solutions complètes pour la transformation des métaux.",
-      features: ["160 tonnes", "Tablier 3m", "Rouleuse 1m50"],
-      gradient: "from-purple-500 to-pink-500",
-      bgGradient: "from-purple-50 to-pink-50"
-    },
-    {
-      icon: Flame,
-      title: "Soudure TIG (Tungsten Inert Gas)",
-      description: "Nombreux postes équipés de TIG pour soudage de haute qualité. Idéal pour les finitions parfaites et les métaux nobles.",
-      features: ["Haute qualité", "Finition parfaite", "Métaux nobles"],
+      icon: Flame,  
+      title: "Soudure TIG",
+      description: "Service de soudure de haute précision pour vos projets exigeants. Idéal pour les finitions soignées.",
+      features: ["Précision", "Qualité", "Fiabilité"],
       gradient: "from-orange-500 to-red-500",
       bgGradient: "from-orange-50 to-red-50"
     },
     {
       icon: Shield,
-      title: "Soudure MIG (Metal Inert Gas)",
-      description: "Postes MIG professionnels pour soudage rapide et efficace. Parfait pour la production industrielle et les gros volumes.",
-      features: ["Soudage rapide", "Production industrielle", "Gros volumes"],
+      title: "Soudure MIG",
+      description: "Solution de soudage polyvalente adaptée à vos besoins. Parfait pour tous types de projets.",
+      features: ["Polyvalence", "Efficacité", "Adaptabilité"],
       gradient: "from-green-500 to-emerald-500",
       bgGradient: "from-green-50 to-emerald-50"
     }
@@ -469,7 +453,7 @@ function ServicesSection() {
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -540,35 +524,41 @@ function MaterialGallerySection() {
   const materials = [
     {
       name: "Soudure en Acier",
-      description: "Travaux de soudure sur acier pour structures industrielles, charpentes et équipements lourds.",
+      description: "Travaux de soudure sur acier pour bateau, automobile et structures légères",
       images: [
         "/soudure-en-acier.jpg",
         "/pose-tôle.jpg",
         "/fabrication-de-charpente-métallique-3.jpg",
-        "/réparation-de-Godet.jpg"
-      ],
-      features: ["Structures industrielles", "Charpentes métalliques", "Équipements lourds", "Réparations"]
-    },
-    {
-      name: "Soudure en Inox",
-      description: "Soudure de précision sur acier inoxydable pour l'industrie alimentaire, chimique et pharmaceutique.",
-      images: [
+        "/réparation-de-Godet.jpg",
+        "/autre.jpg",
         "/fabrication-escalier.jpg",
         "/fabrication-portail-coulissant.jpg",
         "/whatsapp-image-1.jpg",
         "/whatsapp-image-2.jpg"
       ],
-      features: ["Industrie alimentaire", "Secteur chimique", "Équipements médicaux", "Finitions parfaites"]
+      features: ["Bateau", "Automobile", "Structures légères", "Haute précision"]
+      // features: ["Structures industrielles", "Charpentes métalliques", "Équipements lourds", "Réparations"]
     },
-    {
-      name: "Soudure en Aluminium",
-      description: "Soudure spécialisée sur aluminium pour l'aéronautique, l'automobile et les structures légères.",
-      images: [
-        "/autre.jpg",
-        "/hero-background.jpg"
-      ],
-      features: ["Aéronautique", "Automobile", "Structures légères", "Haute précision"]
-    }
+    // {
+    //   name: "Soudure en Inox",
+    //   description: "Soudure de précision sur acier inoxydable pour l'industrie alimentaire, chimique et pharmaceutique",
+    //   images: [
+    //     "/fabrication-escalier.jpg",
+    //     "/fabrication-portail-coulissant.jpg",
+    //     "/whatsapp-image-1.jpg",
+    //     "/whatsapp-image-2.jpg"
+    //   ],
+    //   features: ["Industrie alimentaire", "Secteur chimique", "Équipements médicaux", "Finitions parfaites"]
+    // },
+    // {
+    //   name: "Soudure en Aluminium",
+    //   description: "Soudure spécialisée sur aluminium pour l'aéronautique, l'automobile et les structures légères",
+    //   images: [
+    //     "/autre.jpg",
+    //     "/hero-background.jpg"
+    //   ],
+    //   features: ["Bateau", "Automobile", "Structures légères", "Haute précision"]
+    // }
   ]
 
   const [selectedMaterial, setSelectedMaterial] = useState(0)
@@ -975,19 +965,14 @@ function AboutSection() {
             </p>
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="text-center">
-                <HardHat className="h-12 w-12 text-orange-600 mx-auto mb-2" />
-                <div className="font-semibold text-gray-900">Équipements de Pointe</div>
-                <div className="text-sm text-gray-600">Machines performantes</div>
+               
               </div>
               <div className="text-center">
-                <Shield className="h-12 w-12 text-orange-600 mx-auto mb-2" />
-                <div className="font-semibold text-gray-900">CFAO Performante</div>
-                <div className="text-sm text-gray-600">Conception assistée</div>
+                
+              
               </div>
             </div>
-            <button className="btn-primary">
-              En savoir plus
-            </button>
+          
           </motion.div>
           
           <motion.div
@@ -1011,23 +996,6 @@ function AboutSection() {
               </div>
             </div>
             
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Nos Équipements</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  Équipements de soudage TIG/MIG professionnels
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  2 Plieuses de 160 tonnes
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-orange-500 mr-2" />
-                  1 Rouleuse (capacité : 1m50)
-                </li>
-              </ul>
-            </div>
           </motion.div>
         </div>
       </div>
@@ -1043,19 +1011,19 @@ function TestimonialsSection() {
     {
       name: "Jean-Claude Moreau",
       company: "Métallurgie Lorraine",
-      text: "Junes Soudure a réalisé nos travaux de soudage avec une qualité exceptionnelle. Leur expertise en galva et inox nous a permis d'obtenir des résultats parfaits.",
+      text: "Junes Soudure a réalisé nos assemblages en acier avec une grande précision. Leur maîtrise des techniques de soudage sur structures métalliques lourdes a dépassé nos attentes.",
       rating: 5
     },
     {
       name: "Catherine Roussel",
-      company: "Constructions Industrielles Nancy",
-      text: "Excellent travail de pliage avec leurs plieuses 160 tonnes. Respect des délais et qualité irréprochable pour notre projet.",
+      company: "Constructions Industrielles",
+      text: "Travail remarquable sur nos charpentes en acier. Les délais ont été respectés et la qualité des soudures est irréprochable. Une équipe sérieuse et expérimentée.",
       rating: 5
     },
     {
       name: "Michel Bertrand",
       company: "Ateliers Mécaniques de l'Est",
-      text: "Soudures de très haute qualité sur aluminium et inox. L'équipe de Junes Soudure maîtrise parfaitement son métier. Je recommande.",
+      text: "Les soudures sur acier épais réalisées par Junes Soudure sont d’une excellente tenue. Leur savoir-faire dans le domaine industriel est un vrai atout pour nos projets.",
       rating: 5
     }
   ]
