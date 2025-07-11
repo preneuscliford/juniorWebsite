@@ -400,7 +400,15 @@ function HeroSection() {
  * Section des services de soudure avec animations modernes
  */
 function ServicesSection() {
-  const services = [    
+  const services = [   
+    {
+      icon: Zap,
+      title: "Soudure Arc",
+      description: "Procédé robuste et économique pour tous types de métaux. Idéal pour les travaux en extérieur et les matériaux épais.",
+      features: ["Puissance", "Économique", "Polyvalence"],
+      gradient: "from-blue-500 to-purple-500",
+      bgGradient: "from-blue-50 to-purple-50"
+    }, 
     {
       icon: Flame,  
       title: "Soudure TIG",
@@ -416,7 +424,7 @@ function ServicesSection() {
       features: ["Polyvalence", "Efficacité", "Adaptabilité"],
       gradient: "from-green-500 to-emerald-500",
       bgGradient: "from-green-50 to-emerald-50"
-    }
+    },
   ]
 
   return (
@@ -453,7 +461,7 @@ function ServicesSection() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -524,7 +532,7 @@ function MaterialGallerySection() {
   const materials = [
     {
       name: "Soudure en Acier",
-      description: "Travaux de soudure sur acier pour bateau, automobile et structures légères",
+      description: "Nos travaux de soudure sur acier couvrent une variété d'applications pour bateaux, automobiles et structures diverses. Notre expertise garantit des résultats durables et précis pour tous vos projets métalliques.",
       images: [
         "/soudure-en-acier.jpg",
         "/pose-tôle.jpg",
@@ -536,29 +544,20 @@ function MaterialGallerySection() {
         "/whatsapp-image-1.jpg",
         "/whatsapp-image-2.jpg"
       ],
-      features: ["Bateau", "Automobile", "Structures légères", "Haute précision"]
-      // features: ["Structures industrielles", "Charpentes métalliques", "Équipements lourds", "Réparations"]
+      features: ["Fabrication sur mesure", "Réparation et renforcement", "Assemblage de structures", "Finition professionnelle"]
     },
-    // {
-    //   name: "Soudure en Inox",
-    //   description: "Soudure de précision sur acier inoxydable pour l'industrie alimentaire, chimique et pharmaceutique",
-    //   images: [
-    //     "/fabrication-escalier.jpg",
-    //     "/fabrication-portail-coulissant.jpg",
-    //     "/whatsapp-image-1.jpg",
-    //     "/whatsapp-image-2.jpg"
-    //   ],
-    //   features: ["Industrie alimentaire", "Secteur chimique", "Équipements médicaux", "Finitions parfaites"]
-    // },
-    // {
-    //   name: "Soudure en Aluminium",
-    //   description: "Soudure spécialisée sur aluminium pour l'aéronautique, l'automobile et les structures légères",
-    //   images: [
-    //     "/autre.jpg",
-    //     "/hero-background.jpg"
-    //   ],
-    //   features: ["Bateau", "Automobile", "Structures légères", "Haute précision"]
-    // }
+    {
+      name: "Soudure en Inox",
+      description: "L'inox exige des techniques spécifiques pour garantir des soudures propres et résistantes à la corrosion. Nos services s'adressent aux secteurs exigeant une haute qualité sanitaire et esthétique.",
+      images: [],
+      features: ["Résistance à la corrosion", "Finition miroir possible", "Soudures propres et discrètes", "Idéal pour contextes hygiéniques"]
+    },
+    {
+      name: "Soudure en Aluminium",
+      description: "La soudure sur aluminium demande une expertise particulière que notre équipe maîtrise parfaitement. Idéale pour les projets légers nécessitant résistance et légèreté.",
+      images: [],
+      features: ["Poids réduit", "Excellente résistance mécanique", "Parfait pour structures légères", "Résistance à la corrosion"]
+    }
   ]
 
   const [selectedMaterial, setSelectedMaterial] = useState(0)
@@ -773,74 +772,85 @@ function MaterialGallerySection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            {/* Image principale avec effets */}
-            <div className="relative mb-6 group">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <motion.img
-                key={selectedImage}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                src={materials[selectedMaterial].images[selectedImage]}
-                alt={`${materials[selectedMaterial].name} - Image ${selectedImage + 1}`}
-                className="relative w-full h-80 object-cover rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition-all duration-500 border border-white/20"
-                onClick={() => openModal(selectedImage)}
-              />
-            </div>
-            
-            {/* Miniatures modernisées */}
-            <div className="grid grid-cols-4 gap-4">
-              {materials[selectedMaterial].images.map((image, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * idx, duration: 0.3 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative group cursor-pointer"
-                  onClick={() => setSelectedImage(idx)}
-                >
-                  <div className={`absolute inset-0 rounded-xl transition-all duration-300 ${
-                    selectedImage === idx
-                      ? 'bg-gradient-to-r from-orange-500/30 to-red-500/30 blur-lg scale-110'
-                      : 'bg-white/10 blur-sm group-hover:blur-md group-hover:scale-105'
-                  }`}></div>
-                  
-                  <img
-                    src={image}
-                    alt={`${materials[selectedMaterial].name} - Miniature ${idx + 1}`}
-                    className={`relative h-20 w-full object-cover rounded-xl transition-all duration-300 border-2 ${
-                      selectedImage === idx
-                        ? 'border-orange-400 shadow-lg shadow-orange-500/25'
-                        : 'border-white/20 group-hover:border-white/40'
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      openModal(idx)
-                    }}
+            {/* Affichage conditionnel basé sur la présence d'images */}
+            {materials[selectedMaterial].images && materials[selectedMaterial].images.length > 0 ? (
+              <>
+                {/* Image principale avec effets */}
+                <div className="relative mb-6 group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                  <motion.img
+                    key={selectedImage}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    src={materials[selectedMaterial].images[selectedImage]}
+                    alt={`Exemple de réalisation en ${materials[selectedMaterial].name.toLowerCase()}`}
+                    className="relative w-full h-80 object-cover rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition-all duration-500 border border-white/20"
+                    onClick={() => openModal(selectedImage)}
                   />
-                  
-                  {/* Overlay d'activation */}
-                  {selectedImage === idx && (
-                    <motion.div
-                      layoutId="activeImage"
-                      className="absolute inset-0 border-2 border-orange-400 rounded-xl"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                  
-                  {/* Icône de lecture */}
-                  <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-                    selectedImage === idx ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                  }`}>
-                    <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                    </div>
+                
+                  {/* Miniatures modernisées */}
+                  <div className="grid grid-cols-4 gap-4 mt-6">
+                    {materials[selectedMaterial].images.map((image, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.1 * idx, duration: 0.3 }}
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative group cursor-pointer"
+                        onClick={() => setSelectedImage(idx)}
+                      >
+                        <div className={`absolute inset-0 rounded-xl transition-all duration-300 ${
+                          selectedImage === idx
+                            ? 'bg-gradient-to-r from-orange-500/30 to-red-500/30 blur-lg scale-110'
+                            : 'bg-white/10 blur-sm group-hover:blur-md group-hover:scale-105'
+                        }`}></div>
+                        
+                        <img
+                          src={image}
+                          alt={`Exemple ${idx + 1} de réalisation en ${materials[selectedMaterial].name.toLowerCase()}`}
+                          className={`relative h-20 w-full object-cover rounded-xl transition-all duration-300 border-2 ${
+                            selectedImage === idx
+                              ? 'border-orange-400 shadow-lg shadow-orange-500/25'
+                              : 'border-white/20 group-hover:border-white/40'
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openModal(idx)
+                          }}
+                        />
+                        
+                        {/* Overlay d'activation */}
+                        {selectedImage === idx && (
+                          <motion.div
+                            layoutId="activeImage"
+                            className="absolute inset-0 border-2 border-orange-400 rounded-xl"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        
+                        {/* Icône de lecture */}
+                        <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+                          selectedImage === idx ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                        }`}>
+                          <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                            <div className="w-2 h-2 bg-white rounded-full"></div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </>
+            ) : (
+              <div className="relative h-60 flex items-center justify-center bg-white/5 rounded-2xl border border-white/10">
+                <p className="text-gray-400 text-center px-6">
+                  Les photos de nos réalisations en {materials[selectedMaterial].name.toLowerCase()} seront disponibles prochainement
+                </p>
+              </div>
+            )}
           </motion.div>
 
         {/* Modal carrousel pour affichage en grand */}
