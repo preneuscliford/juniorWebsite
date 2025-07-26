@@ -44,7 +44,7 @@ export default function Home() {
       <AboutSection />
       
       {/* Section Témoignages */}
-      <TestimonialsSection />
+     
       
       {/* Section Contact */}
       <ContactSection />
@@ -542,7 +542,8 @@ function MaterialGallerySection() {
         "/fabrication-escalier.jpg",
         "/fabrication-portail-coulissant.jpg",
         "/whatsapp-image-1.jpg",
-        "/whatsapp-image-2.jpg"
+        "/whatsapp-image-2.jpg",
+        "/soudure-en-acier1.jpg"
       ],
       features: ["Fabrication sur mesure", "Réparation et renforcement", "Assemblage de structures", "Finition professionnelle"]
     },
@@ -555,7 +556,7 @@ function MaterialGallerySection() {
     {
       name: "Soudure en Aluminium",
       description: "La soudure sur aluminium demande une expertise particulière que notre équipe maîtrise parfaitement. Idéale pour les projets légers nécessitant résistance et légèreté.",
-      images: [],
+      images: ["/soudure-aluminium.jpg"],
       features: ["Poids réduit", "Excellente résistance mécanique", "Parfait pour structures légères", "Résistance à la corrosion"]
     }
   ]
@@ -1013,75 +1014,7 @@ function AboutSection() {
   )
 }
 
-/**
- * Section témoignages clients
- */
-function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Jean-Claude Moreau",
-      company: "Métallurgie Lorraine",
-      text: "Junes Soudure a réalisé nos assemblages en acier avec une grande précision. Leur maîtrise des techniques de soudage sur structures métalliques lourdes a dépassé nos attentes.",
-      rating: 5
-    },
-    {
-      name: "Catherine Roussel",
-      company: "Constructions Industrielles",
-      text: "Travail remarquable sur nos charpentes en acier. Les délais ont été respectés et la qualité des soudures est irréprochable. Une équipe sérieuse et expérimentée.",
-      rating: 5
-    },
-    {
-      name: "Michel Bertrand",
-      company: "Ateliers Mécaniques de l'Est",
-      text: "Les soudures sur acier épais réalisées par Junes Soudure sont d’une excellente tenue. Leur savoir-faire dans le domaine industriel est un vrai atout pour nos projets.",
-      rating: 5
-    }
-  ]
 
-  return (
-    <section className="section-padding bg-white">
-      <div className="container-max">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Ce que disent nos <span className="text-gradient">Clients</span>
-          </h2>
-          <p className="text-xl text-gray-600">
-            La satisfaction de nos clients est notre priorité
-          </p>
-        </motion.div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl p-6"
-            >
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"{testimonial.text}"</p>
-              <div>
-                <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                <div className="text-sm text-gray-500">{testimonial.company}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /**
  * Section contact avec formulaire
